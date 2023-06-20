@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 
-<?php use Illuminate\Support\Facades\Cache; ?>
+<?php use Illuminate\Support\Facades\Cache;?>
 
 <html lang="en">
     <head>
-
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Digital Resume</title>
         <script src="js/welcome_scripts.js"></script>
         <link rel="stylesheet" href="css/styles.css">
-    
     </head>
 
     <body>
@@ -20,11 +21,11 @@
         <!--Section with navigation bar along the top which has the following categories: Education, Work Experience, Projects
         When clicked into, each pane displays text corresponding to each category in the bubble-->
         <section class="tab-section">
-            <nav class="tab">
+            <div class="tab">
                     <button class="button", onclick="showTab('tab1')">Education</button>
                     <button class="button", onclick="showTab('tab2')">Work Experience</button>
                     <button class="button", onclick="showTab('tab3')">Projects</button>
-            </nav>
+            </div>
 
             <blockquote id="tab1" class="tab-content active">
                 <h2>Education</h2>
@@ -36,8 +37,6 @@
                 </p>
                 <?php
                     // List of courses
-                    //$coursesJson = file_get_contents(storage_path('app/data/courses.json'));
-                    //$courses = json_decode($coursesJson, true);
                     $courses = Cache::remember('courses', 60, function () {
                         $coursesJson = file_get_contents(storage_path('app/data/courses.json'));
                         return json_decode($coursesJson, true);
